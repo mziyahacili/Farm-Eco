@@ -6,6 +6,9 @@ using Soil.Services.Interfaces;
 
 namespace Soil.Controllers;
 
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
 [ApiController]
 [Route("api/[controller]")]
 public class SoilMoistureController : ControllerBase
@@ -17,13 +20,13 @@ public class SoilMoistureController : ControllerBase
         _soilMoistureService = soilMoistureService;
     }
 
-    [HttpPost("get-soil-moisture")]
-    public async Task<IActionResult> GetSoilMoisture([FromBody] SoilMoistureRequest request)
+    [HttpPost("create-task")]
+    public async Task<IActionResult> CreateTask([FromBody] SoilMoistureRequest request)
     {
         try
         {
-            var soilMoisters = await _soilMoistureService.GetSoilMoistureAsync(request);
-            return Ok(soilMoisters);
+            var taskId = await _soilMoistureService.CreateSoilMoistureTaskAsync(request);
+            return Ok(new { TaskId = taskId });
         }
         catch (HttpRequestException ex)
         {
@@ -31,13 +34,13 @@ public class SoilMoistureController : ControllerBase
         }
     }
 
-    [HttpGet("get-soil-moisture-result/{taskId}")]
-    public async Task<IActionResult> GetSoilMoistureResult(string taskId)
+    [HttpGet("get-result/{taskId}")]
+    public async Task<IActionResult> GetResult(string taskId)
     {
         try
         {
-            var soilMoisters = await _soilMoistureService.GetSoilMoistureResultAsync(taskId);
-            return Ok(soilMoisters);
+            var results = await _soilMoistureService.GetSoilMoistureResultAsync(taskId);
+            return Ok(results);
         }
         catch (HttpRequestException ex)
         {

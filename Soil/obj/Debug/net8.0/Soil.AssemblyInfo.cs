@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Soil")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c39c2edc19716cd526cd9ffe8e97f2672bddec5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+67f309639ab053f48c775ea157deeaad6e625910")]
 [assembly: System.Reflection.AssemblyProductAttribute("Soil")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Soil")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

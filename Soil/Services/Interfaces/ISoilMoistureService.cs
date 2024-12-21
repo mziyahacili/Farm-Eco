@@ -6,6 +6,8 @@ namespace Soil.Services.Interfaces;
 
 public interface ISoilMoistureService
 {
-    Task<List<SoilMoistureDTO>> GetSoilMoistureAsync(SoilMoistureRequest request);
+  
+    Task<string> CreateSoilMoistureTaskAsync(SoilMoistureRequest request);
+  
     Task<List<SoilMoistureDTO>> GetSoilMoistureResultAsync(string taskId);
 }

@@ -9,7 +9,7 @@ builder.Services.AddOcelot();
 
 var app = builder.Build();
 
-app.UseOcelot();
+app.UseOcelot().Wait();
 
 app.UseHttpsRedirection();
 

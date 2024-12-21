@@ -8,7 +8,8 @@ public class SoilMoistureProfile : Profile
 {
     public SoilMoistureProfile()
     {
-        CreateMap<SoilMoistureDTO, SoilMoisture>();
-        CreateMap<SoilMoisture, SoilMoistureDTO>();
+        CreateMap<SoilMoisture, SoilMoistureDTO>()
+            .ForMember(dest => dest.SurfaceMoisture, opt => opt.MapFrom(src => src.Average))
+            .ForMember(dest => dest.RootZoneMoisture, opt => opt.MapFrom(src => src.Ctime10));
     }
 }

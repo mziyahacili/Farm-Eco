@@ -2,5 +2,8 @@
 
 public class SoilMoistureResponse
 {
-    public List<Result> Result { get; set; }
+    public string Status { get; set; }
+    public string TaskId { get; set; }
+    public string ReqId { get; set; }
+    public int TaskTimeout { get; set; }
 }

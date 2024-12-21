@@ -25,7 +25,6 @@ namespace Soil
 
             services.AddControllers();
             services.AddHttpClient<ISoilMoistureService, SoilMoistureService>();
-
             
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -39,7 +38,9 @@ namespace Soil
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            
+            app.UseRouting();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
             app.UseHttpsRedirection();
         }
     }

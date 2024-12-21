@@ -1,4 +1,5 @@
-﻿using Soil.DTOs;
+﻿using Soil.Context;
+using Soil.DTOs;
 using Soil.Models;
 using Soil.Services.Interfaces;
 
@@ -17,33 +18,38 @@ public class SoilMoistureService : ISoilMoistureService
     private readonly IMapper _mapper;
     private readonly string _apiKey;
 
-    public SoilMoistureService(HttpClient httpClient, IMapper mapper, string apiKey, IConfiguration configuration)
+    public SoilMoistureService(HttpClient httpClient, IMapper mapper, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _mapper = mapper;
-        _apiKey = configuration["EosdaApi:Key"]; 
+        _apiKey = configuration["EosdaApi:Key"];
     }
 
-    
-    public async Task<List<SoilMoistureDTO>> GetSoilMoistureAsync(SoilMoistureRequest request)
+    public async Task<string> CreateSoilMoistureTaskAsync(SoilMoistureRequest request)
     {
-        var uri = "https://api-connect.eos.com/api/gdw/api?api_key=" + _apiKey;
+        var uri = $"https://api-connect.eos.com/api/gdw/api?api_key={_apiKey}";
+
+        if (string.IsNullOrEmpty(request.Params.DateStart) || string.IsNullOrEmpty(request.Params.DateEnd))
+        {
+            throw new ArgumentException("DateStart и DateEnd обязательны для заполнения.");
+        }
 
         var jsonRequest = JsonSerializer.Serialize(request);
-        var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+        var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json"); // Убедитесь, что MIME-тип JSON
 
         var response = await _httpClient.PostAsync(uri, content);
-        
+
         if (response.IsSuccessStatusCode)
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var soilMoistureResponse = JsonSerializer.Deserialize<SoilMoistureResponse>(jsonResponse);
-            
-            return _mapper.Map<List<SoilMoistureDTO>>(soilMoistureResponse.Result);
+            return soilMoistureResponse.TaskId;
         }
 
-        throw new HttpRequestException("Error retrieving soil moisture data.");
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        throw new HttpRequestException($"Ошибка при создании задачи: {errorResponse}");
     }
+
 
     public async Task<List<SoilMoistureDTO>> GetSoilMoistureResultAsync(string taskId)
     {
@@ -54,11 +60,11 @@ public class SoilMoistureService : ISoilMoistureService
         if (response.IsSuccessStatusCode)
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            var soilMoistureResponse = JsonSerializer.Deserialize<SoilMoistureResponse>(jsonResponse);
-            
-            return _mapper.Map<List<SoilMoistureDTO>>(soilMoistureResponse.Result);
+            var soilMoistureResult = JsonSerializer.Deserialize<Result>(jsonResponse);
+
+            return _mapper.Map<List<SoilMoistureDTO>>(soilMoistureResult.Results);
         }
 
-        throw new HttpRequestException("Error retrieving soil moisture result.");
+        throw new HttpRequestException("Ошибка при получении результатов данных о влажности почвы.");
     }
 }

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Soil.DTOs;
 using Soil.Models;
 
@@ -6,8 +6,7 @@ namespace Soil.Profiles;
 
 public class SoilDataProfile : Profile
 {
-    public SoilDataProfile()
-    {
+    public SoilDataProfile() {
         CreateMap<SoilDataDTO, SoilData>()
             .ConstructUsing(src => new SoilData(
                 src.SceneId,

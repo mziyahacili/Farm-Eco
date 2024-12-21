@@ -2,12 +2,10 @@
 
 public class SoilMoisture
 {
-    public string SceneId { get; init; }  
-    public string ViewId { get; init; }
-    public DateTime Date { get; init; }
-    public double Average { get; init; }  
-    public double? Min { get; init; }      
-    public double? Max { get; init; }        
-    public string Unit { get; init; }      
+    public string SceneId { get; set; }
+    public string ViewId { get; set; }
+    public string Date { get; set; }
+    public double? Average { get; set; }
+    public double? Ctime10 { get; set; }   
 
 }
