@@ -1,0 +1,23 @@
+﻿{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/auth/{everything}",
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPort": "localhost:5001",   
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT", "DELETE" ],
+      "Key": "AuthAPI"
+    },
+    {
+      "DownstreamPathTemplate": "/soil/{everything}",
+      "UpstreamPathTemplate": "/soil/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPort": "localhost:5002",   
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "Key": "SoilAPI"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"  
+  }
+}
