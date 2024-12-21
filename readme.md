@@ -1,8 +1,8 @@
-# farm-Eco
+# Farm-Eco
 
 ## Description
 
-**farm-Eco** is a system built using a microservices architecture, designed for monitoring and predicting soil and climate conditions in agricultural fields. The system consists of several services, each performing a specific task, from processing data on soil and climate to prediction and providing information to users.
+**Farm-Eco** is a system built using a microservices architecture, designed for monitoring and predicting soil and climate conditions in agricultural fields. The system consists of several services, each performing a specific task, from processing data on soil and climate to prediction and providing information to users.
 
 ### Key Features:
 - Predicting soil conditions based on climate factors.

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="ziyahaciev_farm@sql.bsite.net" uuid="033cc3a8-12a2-4532-8c2d-a1eca5f773c1">
+      <driver-ref>sqlserver.jb</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
+      <jdbc-url>Server=sql.bsite.net\MSSQL2016;Database=ziyahaciev_farm;TrustServerCertificate=true;Encrypt=False;User Id=ziyahaciev_farm;Password=20072288bbAziya;Connect Timeout=30</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
