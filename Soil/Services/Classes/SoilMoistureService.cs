@@ -33,9 +33,10 @@ public class SoilMoistureService : ISoilMoistureService
         {
             throw new ArgumentException("DateStart и DateEnd обязательны для заполнения.");
         }
-
+        
         var jsonRequest = JsonSerializer.Serialize(request);
         var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+        content.Headers.Add("x-api-key", _apiKey);
 
         var response = await _httpClient.PostAsync(uri, content);
 

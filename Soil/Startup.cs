@@ -17,17 +17,11 @@ namespace Soil
 
         public void ConfigureServices(IServiceCollection services)
         {
-           
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddControllers();
-            
-            
-            
             services.AddHttpClient<ISoilMoistureService, SoilMoistureService>();
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

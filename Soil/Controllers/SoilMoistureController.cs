@@ -25,12 +25,21 @@ public class SoilMoistureController : ControllerBase
     {
         try
         {
-            var res = await _soilMoistureService.CreateSoilMoistureTaskAsync(request);
-            return Ok( res );
+            var result = await _soilMoistureService.CreateSoilMoistureTaskAsync(request);
+            return Ok(result);
+            
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest($"Некорректный запрос: {ex.Message}");
         }
         catch (HttpRequestException ex)
         {
-            return BadRequest(ex.Message);
+            return StatusCode(500, $"Ошибка сервера: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Неизвестная ошибка: {ex.Message}");
         }
     }
 
