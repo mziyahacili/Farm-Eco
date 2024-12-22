@@ -25,8 +25,8 @@ public class SoilMoistureController : ControllerBase
     {
         try
         {
-            var taskId = await _soilMoistureService.CreateSoilMoistureTaskAsync(request);
-            return Ok(new { TaskId = taskId });
+            var res = await _soilMoistureService.CreateSoilMoistureTaskAsync(request);
+            return Ok( res );
         }
         catch (HttpRequestException ex)
         {

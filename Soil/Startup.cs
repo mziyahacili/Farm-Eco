@@ -20,12 +20,14 @@ namespace Soil
            
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            services.AddHttpClient();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
-            services.AddHttpClient<ISoilMoistureService, SoilMoistureService>();
             
+            
+            
+            services.AddHttpClient<ISoilMoistureService, SoilMoistureService>();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }

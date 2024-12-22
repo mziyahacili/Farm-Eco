@@ -1,4 +1,4 @@
-﻿using Soil.Context;
+﻿﻿using Soil.Context;
 using Soil.DTOs;
 using Soil.Models;
 using Soil.Services.Interfaces;
@@ -25,7 +25,7 @@ public class SoilMoistureService : ISoilMoistureService
         _apiKey = configuration["EosdaApi:Key"];
     }
 
-    public async Task<string> CreateSoilMoistureTaskAsync(SoilMoistureRequest request)
+    public async Task<SoilMoistureResponse> CreateSoilMoistureTaskAsync(SoilMoistureRequest request)
     {
         var uri = $"https://api-connect.eos.com/api/gdw/api?api_key={_apiKey}";
 
@@ -35,7 +35,7 @@ public class SoilMoistureService : ISoilMoistureService
         }
 
         var jsonRequest = JsonSerializer.Serialize(request);
-        var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json"); // Убедитесь, что MIME-тип JSON
+        var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
         var response = await _httpClient.PostAsync(uri, content);
 
@@ -43,7 +43,7 @@ public class SoilMoistureService : ISoilMoistureService
         {
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var soilMoistureResponse = JsonSerializer.Deserialize<SoilMoistureResponse>(jsonResponse);
-            return soilMoistureResponse.TaskId;
+            return soilMoistureResponse;
         }
 
         var errorResponse = await response.Content.ReadAsStringAsync();
