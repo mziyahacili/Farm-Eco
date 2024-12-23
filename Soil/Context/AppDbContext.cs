@@ -5,7 +5,6 @@ namespace Soil.Context;
 public class AppDbContext : DbContext
 {
     
-    public DbSet<SoilData> SoilDatas { get; set; }
     
     public AppDbContext(DbContextOptions<AppDbContext> ops) : base(ops)
     {

@@ -21,9 +21,9 @@ namespace Soil
             services.AddSwaggerGen();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
-            services.AddHttpClient<ISoilMoistureService, SoilMoistureService>();
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHttpClient<ISoilGridsService, SoilGridsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
