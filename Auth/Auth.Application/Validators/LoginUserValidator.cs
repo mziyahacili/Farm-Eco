@@ -18,5 +18,7 @@ public class LoginUserValidator : AbstractValidator<LoginDTO>
             .WithMessage("Password is required")
             .Matches(RegexPatterns.passwordPattern)
             .When(x => x.Password != null);
+        
+        
     }
 }

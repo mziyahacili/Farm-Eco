@@ -15,6 +15,7 @@ public class AuthContext : DbContext
 
     public AuthContext(DbContextOptions<AuthContext> options) : base(options)
     {
+        
     }
 
 
