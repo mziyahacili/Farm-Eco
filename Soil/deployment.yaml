@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: soil
+  namespace: farm-eco
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: soil
+  template:
+    metadata:
+      labels:
+        app: soil
+    spec:
+      containers:
+      - name: soil-container
+        image: soil-api:latest
+        ports:
+        - containerPort: 5000
