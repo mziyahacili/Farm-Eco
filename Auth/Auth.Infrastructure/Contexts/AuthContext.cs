@@ -9,9 +9,7 @@ public class AuthContext : DbContext
     public DbSet<AppRole> AppRoles { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
 
-    public AuthContext()
-    {
-    }
+ 
 
     public AuthContext(DbContextOptions<AuthContext> options) : base(options)
     {

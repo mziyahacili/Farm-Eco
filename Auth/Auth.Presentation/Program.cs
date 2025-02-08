@@ -141,9 +141,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AuthContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultMacAuth"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.AddGrpc();
 
 
 builder.Services.AddScoped<LoginUserValidator>();
@@ -165,16 +165,19 @@ app.UseCors();
 
 app.UseStaticFiles();
 
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseCookiePolicy();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseMiddleware<GlobalExceptionsMiddleware>();
 app.UseMiddleware<JwtSessionMiddleware>();
 
 app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthorization();    
+
+app.MapGrpcService<Auth.Infrastructure.gRPC.UserService>();
 
 app.MapControllers();
 
